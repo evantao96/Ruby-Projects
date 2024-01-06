@@ -71,6 +71,11 @@ end
 # {'foo' => 3, 'bar' => 2}. The built-in invert method in the Hash class will be
 # disabled.
 def invert(hash)
+	ans = {}
+	hash.each do |key, value|
+		ans[value] = key
+	end
+	return ans
 end
 
 # 6. In the fetch method, you will implement something similar to Hash's
@@ -83,5 +88,12 @@ end
 # Hint: While you may not change the method name, you may
 # change the arguments as long as the method can accept the same number of
 # arguments.
-def fetch(hash, key, default)
+def fetch(hash, key, default = (default_was_passed = false; "missing"))
+	ans = default
+	hash.each do |k, v|
+		if k.equal? key
+			ans = v
+		end
+	end
+	return ans
 end
