@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter Clone</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+      <div class="container">
+        <%= link_to 'Twitter Clone', root_path, class: 'navbar-brand' %>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_content">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbar_content" class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <%= link_to 'Users', '/users', class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Tweets', '/tweets', class: 'nav-link' %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

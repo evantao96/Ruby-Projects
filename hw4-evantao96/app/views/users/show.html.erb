@@ -1,0 +1,16 @@
+<h1><%= @user.name %></h1>
+<hr>
+<h5>Tweets:</h5>
+<ul>
+  <% @user.tweets.each do |tweet| %>
+    <li><%= tweet.body %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Tweet', '/tweets/new', class: 'btn btn-primary' %>
+
+<hr>
+
+<%= link_to 'Back', '/users' %> |
+<%= link_to 'Edit', "/users/#{@user.id}/edit" %> |
+<%= link_to 'Delete', "/users/#{@user.id}", method: :delete, data: { confirm: 'Are you sure?' } %>

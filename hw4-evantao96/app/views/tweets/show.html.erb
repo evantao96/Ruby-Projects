@@ -1,0 +1,10 @@
+<h1>Tweet</h1>
+<hr>
+
+<%= link_to @tweet.user.name, @tweet.user %> - <%= @tweet.body %>
+
+<hr>
+
+<%= link_to 'Back', '/tweets' %> |
+<%= link_to 'Edit', "/tweets/#{@tweet.id}/edit" %> |
+<%= link_to 'Delete', "/tweets/#{@tweet.id}", method: :delete, data: { confirm: 'Are you sure?' } %>

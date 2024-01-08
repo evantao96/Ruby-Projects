@@ -1,0 +1,15 @@
+<%= form_for(tweet) do |f| %>
+  <div class="field form-group">
+    <%= f.label :user %>
+    <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :name), {}, { class: 'form-control' } %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
