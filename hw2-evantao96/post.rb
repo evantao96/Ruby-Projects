@@ -2,42 +2,15 @@ require './user.rb'
 require './referenceable.rb'
 
 class Post
-  attr_accessor :title
-  attr_accessor :body
-  attr_accessor :user
-  attr_reader :id
+
+  extend Referenceable::ClassMethods
+  include Referenceable::InstanceMethods
+
+  attr_accessor :title, :body, :user
 
   @all = []
   @count = 0
   @last_id = 0
-
-  def self.all
-    @all 
-  end
-
-  def self.count
-    @count
-  end
-
-  def self.last_id
-    @last_id
-  end
-
-  def self.add_count
-    @count += 1
-  end
-
-  def self.add_id
-    @last_id += 1
-  end
-
-  def self.find(id)
-    if id <= @last_id
-      return @all[id]
-    else
-      return nil 
-    end
-  end
 
   def initialize(params = {})
     assign_attributes(params)
@@ -50,9 +23,9 @@ class Post
   def save
     if self.valid?
       if @id.nil?
+        Post.count += 1
+        @id = Post.add_id
         Post.all << self
-        Post.add_count
-        Post.add_id
         @user.posts << self
       end
       return true
@@ -79,9 +52,9 @@ class Post
   def delete
     unless @id.nil?
       @id = nil
-      @count -= 1
-      if self.valid?
-        @all.delete(self)
+      Post.count -= 1
+      Post.all.delete(self)
+      unless @user.nil?
         @user.posts.delete(self)
       end
     end

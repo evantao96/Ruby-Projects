@@ -2,32 +2,40 @@ module Referenceable
 
 	module ClassMethods
 
-		def self.last_id
-    		@last_id
-  		end
-
-  		def self.count
-    		@count
-  		end
-
-  		def self.all
+  		def all
     		@all 
   		end
 
-  	  	def self.add_count
-    		@count += 1
+  		def count
+    		@count
   		end
 
-  		def self.add_id
+		def last_id
+    		@last_id
+  		end
+
+  	  	def count=(num)
+    		@count = num
+  		end
+
+  		def add_id
     		@last_id += 1
   		end
 
-  	  	def self.find(id)
+  	  	def find(id)
     		if id <= @last_id
       			return @all[id]
     		else
       			return nil 
     		end
   		end
+	end
+
+	module InstanceMethods
+
+		def id
+			@id
+		end
+
 	end
 end

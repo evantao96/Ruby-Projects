@@ -2,41 +2,16 @@ require './post.rb'
 require './referenceable.rb'
 
 class User
+
+  extend Referenceable::ClassMethods
+  include Referenceable::InstanceMethods
+
   attr_accessor :name
   attr_reader :posts
-  attr_reader :id
 
   @all = []
   @count = 0
   @last_id = 0
-
-  def self.all
-    @all 
-  end
-
-  def self.count
-    @count
-  end
-
-  def self.last_id
-    @last_id
-  end
-
-  def self.add_count
-    @count += 1
-  end
-
-  def self.add_id
-    @last_id += 1
-  end
-
-  def self.find(id)
-    if id <= @last_id
-      return @all[id]
-    else
-      return nil 
-    end
-  end
 
   def initialize(params = {})
     assign_attributes(params)
@@ -50,9 +25,9 @@ class User
   def save
     if self.valid?
       if @id.nil?
+        User.count += 1
+        @id = User.add_id
         User.all << self
-        User.add_count
-        User.add_id
       end
       return true
     else
@@ -61,7 +36,7 @@ class User
   end
 
   def update(params = {})
-    my_hash = {:name => @title, :posts => @posts}
+    my_hash = {:name => @name, :posts => @posts}
     @name = params[:name] if params.key?(:name)
     if self.valid?
       self.save
@@ -74,10 +49,8 @@ class User
   def delete
     unless @id.nil?
       @id = nil
-      @count -= 1
-      if self.valid?
-        @all.delete(self)
-      end
+      User.count -= 1
+      User.all.delete(self)
     end
     return self
   end
@@ -87,6 +60,7 @@ class User
       my_post.destroy
     end
     @posts = []
+    self.delete
   end
 
   private
