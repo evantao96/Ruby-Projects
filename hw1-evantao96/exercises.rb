@@ -12,7 +12,13 @@
 def find_evens(elements)
 	ans = []
 	elements.each do |num|
-		ans << num if num.even?
+		if num.is_a? Numeric
+			if num .is_a? Integer
+				if num.even?
+					ans << num 
+				end
+			end
+		end
 	end
 	return ans
 end
@@ -23,7 +29,16 @@ end
 # should return 6.
 def product(elements)
 	prod = 1
+	nums = []
 	elements.each do |num|
+		if num.is_a? Numeric
+			nums << num
+		end
+	end
+	if nums == []
+		return 0
+	end
+	nums.each do |num|
 		prod = prod * num
 	end
 	return prod
@@ -59,7 +74,7 @@ def parse_phone_number(phone_number)
 			ans << item
 		end
 	end
-	ans = '(' + ans[0..3] + ') ' + ans[4..6] + '-' + ans[7..10]
+	ans = '(' + ans[0..2] + ') ' + ans[3..5] + '-' + ans[6..9]
 	return ans
 end
 

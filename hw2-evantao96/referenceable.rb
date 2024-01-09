@@ -23,11 +23,12 @@ module Referenceable
   		end
 
   	  	def find(id)
-    		if id <= @last_id
-      			return @all[id]
-    		else
-      			return nil 
+    		@all.each do |item|
+    			if item.id == id 
+    				return item 
+    			end
     		end
+    		return nil
   		end
 	end
 

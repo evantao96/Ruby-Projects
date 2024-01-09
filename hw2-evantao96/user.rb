@@ -73,9 +73,4 @@ class User
     { name: @name }
   end
 
-  def set_up_new_instance
-    User.count += 1
-    @id = User.add_id
-    User.all << self
-  end
 end
