@@ -1,1 +1,11 @@
-<p>Remove this line and fill in the homepage!</p>
+<h1>Book Log</h1>
+<p> Welcome to the Book Log application! </p>
+<h3> My Favorite Books:</h3>
+<ol>
+	<% @favorite_books.each do |f| %>
+	<li><%= f %></li>
+	<% end %>
+</ol>
+
+<%= link_to "See All Authors", "/authors" %>
+<%= link_to "See All Books", "/books" %>
