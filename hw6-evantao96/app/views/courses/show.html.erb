@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @course.title %>
+  <div class="float-right">
+    <%= link_to edit_course_path(@course) do %>
+      <%= fa_icon :pencil %>
+    <% end %>
+    <%= link_to @course, method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= fa_icon :trash %>
+    <% end %>
+  </div>
+</h1>
+
+<hr>
+
+<h6><strong>Description:</strong></h6>
+<p><%= @course.description %></p>
+
+<div class="row">
+  <div class="col-md-6">
+    <h6><strong>Student List:</strong></h6>
+    <% if @course.students.empty? %>
+      <p>No students have added this course.</p>
+    <% else %>
+      <table class="table table-sm">
+        <% @course.students.each do |student| %>
+          <tr>
+            <td><%= link_to student.full_name, student %></td>
+            <td><%= link_to 'Remove from course', "/courses/#{@course.id}/students/#{student.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+    <h6><strong>Add Student to Course:</strong></h6>
+    <%= form_tag "/courses/#{@course.id}/students", class: 'form' do %>
+      <div class="form-group">
+        <%= select_tag :student_id, options_from_collection_for_select(@students, :id, :full_name), prompt: '--select student--', class: 'form-control form-control-sm' %>
+      </div>
+      <%= button_tag 'Add Student', class: 'btn btn-sm btn-primary' %> 
+    <% end %>
+    <br>
+  </div>
+
+  <div class="col-md-6">
+    <h6><strong>Course Reviews:</strong></h6>
+    <% if @course.reviews.empty? %>
+      <p>There are no reviews for this course</p>
+    <% else %>
+      <table class="table">
+        <% @course.reviews.each do |review| %>
+          <tr>
+            <td><%= review.content %></td>
+            <td>
+              <%= link_to edit_course_review_path(@course, review) do %>
+                <%= fa_icon :pencil %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to course_review_path(@course, review) , method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <%= fa_icon :trash %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+
+    <h6><strong>Add Review:</strong></h6>
+    <%= form_for [@course, @review] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :content, class: 'form-control', rows: 3 %>
+      </div>
+      <%= f.submit 'Add Review', class: 'btn btn-sm btn-primary' %>
+    <% end %>
+  </div>
+</div>
+

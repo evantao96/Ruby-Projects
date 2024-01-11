@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Courses</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.title, course %></td>
+        <td><%= course.description.truncate(60) %></td>
+        <td>
+          <%= link_to edit_course_path(course) do %>
+            <%= fa_icon :pencil %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to course, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= fa_icon :trash %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Course', new_course_path, class: 'btn btn-primary' %>

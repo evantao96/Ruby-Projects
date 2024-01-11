@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Students</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Full name</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= link_to student.full_name, student %></td>
+        <td>
+          <%= link_to edit_student_path(student) do %>
+            <%= fa_icon :pencil %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= fa_icon :trash %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student', new_student_path, class: 'btn btn-primary' %>

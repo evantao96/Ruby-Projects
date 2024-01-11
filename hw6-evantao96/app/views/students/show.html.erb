@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @student.full_name %>
+  <div class="float-right">
+    <%= link_to edit_student_path(@student) do %>
+      <%= fa_icon :pencil %>
+    <% end %>
+    <%= link_to @student, method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <%= fa_icon :trash %>
+    <% end %>
+  </div>
+</h1>
+
+<hr>
+
+<h6><strong>Course Schedule:</strong></h6>
+<% if @student.courses.empty? %>
+  <p>This student doesn't have any courses yet</p>
+<% else %>
+  <table class="table table-sm">
+    <% @student.courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.title, course %></td>
+        <td><%= link_to 'Remove course from schedule', "/students/#{@student.id}/courses/#{course.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<br>
+
+<h6><strong>Add Course to Student's Schedule:</strong></h6>
+<%= form_tag "/students/#{@student.id}/courses" do %>
+  <div class="form-group">
+    <%= select_tag :course_id, options_from_collection_for_select(@courses, :id, :title), prompt: '--select course--', class: 'form-control form-control-sm' %>
+  </div>
+  <%= button_tag 'Add Course', class: 'btn btn-sm btn-primary' %>
+<% end %>
+
