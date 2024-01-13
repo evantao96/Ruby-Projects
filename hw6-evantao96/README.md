@@ -44,7 +44,7 @@ Generate the 7 RESTful routes as usual. This would be a good place to use the Sc
 
 #### show
 Inside of the `show` action, define an instance variable `@students` that contains all of the current student objects. Define an instance variable `@review` that contains a new instance of the `Review` class.
-
+ 
 #### add_student
 Define an `add_student` action. This should be a POST request to `courses/:id/students`. You should define the `@course` variable in this method by using the `set_course` `before_action`. If `student_id` exists within the `params` hash, find the student with corresponding `student_id` and add this student to the course's list of students unless the student is already in the list. Redirect to the course's show page.<br>
 *NOTE:* You are not creating a new student here, you are just adding the student with the specified `student_id` to the course's student list.

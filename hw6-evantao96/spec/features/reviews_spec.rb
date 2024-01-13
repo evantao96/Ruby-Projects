@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rack/builder'
 
 RSpec.feature "Reviews", type: :feature do
   let!(:course) { Course.create(title: 'CIS 196', description: 'Ruby on Rails Web Development') }

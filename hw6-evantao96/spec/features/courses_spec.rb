@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rack/builder'
 
 RSpec.feature "Courses", type: :feature do
   let!(:cis196_title) { 'CIS 196' }

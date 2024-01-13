@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'rack/builder'
 
 RSpec.feature "Students", type: :feature do
   let!(:student1_first_name) { 'First' }
