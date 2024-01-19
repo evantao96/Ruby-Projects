@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module Hw8
   class Application < Rails::Application
-    # TODO: Add RSpotify Authentication below
+    unless Rails.env.test?
+      RSpotify::authenticate(Rails.application.secrets.spotify_client_id, Rails.application.secrets.spotify_client_secret)
+   end
   end
 end
+
+
