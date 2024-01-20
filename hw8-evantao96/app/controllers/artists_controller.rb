@@ -13,7 +13,9 @@ class ArtistsController < ApplicationController
   # GET /artists/new
   def new
     @artist = Artist.new
-    # TODO: Build three songs for the artist being created
+    3.times do
+      @artist.songs.build
+    end
   end
 
   # POST /artists
@@ -58,6 +60,6 @@ class ArtistsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def artist_params
     # TODO: Ensure that the artist form will permit a name and songs_attributes
-    params.require(:artist).permit(:name)
+    params.require(:artist).permit(:name, songs_attributes: [:name])
   end
 end
