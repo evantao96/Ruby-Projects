@@ -1,0 +1,11 @@
+<h1>Welcome to the Note-Taking App</h1>
+<ol>
+<% notes_sorted = @notes.sort_by(&:updated_at).reverse().first(3) %>
+<% notes_sorted.each do |n| %>
+<%      unless n.nil? %>
+<li> <%= link_to n.title, note_path(n)%> &nbsp; <%= link_to "Edit", edit_note_path(n)%> </li>
+<%= n.body %>
+<% end %>
+<% end %>
+</ol>
+<%= button_to "Create New Note", new_note_path, method: :get %>
